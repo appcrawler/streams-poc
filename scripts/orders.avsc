@@ -1,0 +1,27 @@
+{
+  "type": "record",
+  "name": "value_orders_s",
+  "namespace": "orders_s",
+  "fields": [
+    {
+      "name": "order_id",
+      "type": "string"
+    },
+    {
+      "name": "customer_id",
+      "type": "string"
+    },
+    {
+      "name": "sku",
+      "type": "string"
+    },
+    {
+      "name": "price",
+      "type": "int"
+    },
+    {
+      "name": "quantity",
+      "type": "int"
+    }
+  ]
+}

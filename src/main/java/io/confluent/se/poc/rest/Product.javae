@@ -1,0 +1,47 @@
+package io.confluent.se.poc.rest;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONArray;
+
+import org.apache.kafka.streams.*;
+import org.apache.kafka.streams.kstream.*;
+import org.apache.kafka.common.serialization.*;
+
+import java.util.*;
+import java.sql.*;
+import javax.sql.*;
+import javax.naming.*;
+
+@Path("/product")
+public class Product {
+
+  @GET
+  @Produces("application/json")
+  public Response getNames() throws JSONException {
+    Properties settings = new Properties ();
+    settings.put(StreamsConfig.APPLICATION_ID_CONFIG,"se-tutorial-v0.1.0");
+    settings.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+    final Serde<String> stringSerde = Serdes.String();
+ 
+    StreamsBuilder builder = new StreamsBuilder();
+    KStream<String, String> temperatures = builder.stream("temps",Consumed.with(stringSerde, stringSerde));
+    KStream<String, String> highTemps = temperatures.filter( (key, value) -> Integer.parseInt(value) > 25);
+    highTemps.to("high-temps",Produced.with(stringSerde, stringSerde));
+    Topology topology = builder.build();
+    KafkaStreams streams = new KafkaStreams (topology, settings);
+    streams.start();
+ 
+    Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+      streams.close();
+    }));
+
+    return null;
+  }
+}

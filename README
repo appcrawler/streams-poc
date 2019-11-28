@@ -1,0 +1,15 @@
+compile the streams software with a standard maven command in this directory, i.e.,
+mvn compile package install
+
+cd scripts
+run ./setup.sh in this directory
+
+setup.sh will gut the existing local confluent configuration including all topics, schemas, and 
+connectors.  Ensure this is what you want before you run it!
+
+The script, after gutting and restarting the local confluent stack, creates topics and KSQL objects.
+It also starts two instances of the streams software we built above.  Lastly, it loads random
+customers and orders.  You can load data by running the produce.sh script in the scripts directory.
+Again, it is location specific, so ensure you are in the scripts directory to run produce.sh 
+
+TO-DO - clean up hradcoded references, as well as static references inside some of the classes.

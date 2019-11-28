@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Created-By: Apache Maven 3.5.4
+Built-By: kama
+Build-Jdk: 9.0.4
+Specification-Title: Apache Maven Shade Plugin
+Specification-Version: 3.2
+Specification-Vendor: The Apache Software Foundation
+Implementation-Title: Apache Maven Shade Plugin
+Implementation-Version: 3.2.0
+Implementation-Vendor-Id: org.apache.maven.plugins
+Implementation-Vendor: The Apache Software Foundation
+Implementation-URL: https://maven.apache.org/plugins/maven-shade-plugi
+ n/
+

@@ -1,0 +1,31 @@
+{
+  "type": "record",
+  "name": "value_customers_s",
+  "namespace": "customers_s",
+  "fields": [
+    {
+      "name": "customer_id",
+      "type": "string"
+    },
+    {
+      "name": "first_name",
+      "type": "string"
+    },
+    {
+      "name": "last_name",
+      "type": "string"
+    },
+    {
+      "name": "age",
+      "type": "int"
+    },
+    {
+      "name": "gender",
+      "type": "string"
+    },
+    {
+      "name": "state",
+      "type": "string"
+    }
+  ]
+}

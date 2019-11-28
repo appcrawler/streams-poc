@@ -1,0 +1,22 @@
+create stream customers_s (customer_id string,first_name string,
+                           last_name string,age int, gender string, state string)
+  with (kafka_topic = 'customers_stream', value_format = 'AVRO');
+
+create stream orders_s (order_id string, customer_id string,sku string,
+                           price int,quantity int)
+  with (kafka_topic = 'orders_s', value_format = 'AVRO');
+
+create table customers_t (customer_id string,first_name string,
+                          last_name string, age int, gender string, state string)
+  with (kafka_topic = 'customers_table', value_format = 'AVRO', key = 'customer_id');
+
+create stream orders_rekey_s WITH (REPLICAS = 1, PARTITIONS = 2, KAFKA_TOPIC = 'ORDERS_REKEY_S') as
+  select *
+    from orders_s
+    partition by customer_id;
+
+create stream orders_customers_s (order_id string,sku string,
+                          price int, quantity int,
+                          first_name string, last_name string)
+  with (kafka_topic = 'orders_customers_stream', value_format = 'AVRO');
+
