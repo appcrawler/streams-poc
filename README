@@ -12,4 +12,10 @@ It also starts two instances of the streams software we built above.  Lastly, it
 customers and orders.  You can load data by running the produce.sh script in the scripts directory.
 Again, it is location specific, so ensure you are in the scripts directory to run produce.sh 
 
-TO-DO - clean up hradcoded references, as well as static references inside some of the classes.
+To run the check.sh script located under scripts, it assumes you have a load balancer such as HAProxy
+listening on port 7000, and forwarding to ports 8080, 8180, and 8280 for the streams apps that
+are each listening on those port, respectively.  If you don't have a load balancer, you can simply
+post any of the three and you should get the customer queried, regardless of whether it is located
+in the state store of that instance, or not.
+
+TO-DO - clean up hardcoded references, as well as static references inside some of the classes.

@@ -13,8 +13,21 @@ import org.json.*;
 public class PocData {
   public static void main(String[] args) throws Exception{
     PocData pd = new PocData();
-    pd.loadOrders();
-    pd.loadCustomers();
+    if (args.length == 0) {
+      pd.loadOrders();
+      pd.loadCustomers();
+    }
+    else if (args.length == 1) {
+      if (args[0].equals("customers")) {
+        pd.loadCustomers();
+      }
+      else if (args[0].equals("orders")) {
+        pd.loadOrders();
+      }
+    }
+    else {
+      System.out.println("ARGUMENTS: null -or- \"customers\" -or- \"orders\""); 
+    }
   }
 
   public void loadOrders() throws Exception {
@@ -53,10 +66,10 @@ public class PocData {
         String order_id = "OH";
         gr.put("order_id","ORD" + i);
         j = j++ > 20 ? 1 : j;
-        gr.put("customer_id","CUST" + j);
-        gr.put("sku","SKU" + i);
-        gr.put("quantity", i);
-        gr.put("price", i);
+        gr.put("customer_id","CUST" + r.nextInt(20));
+        gr.put("sku","SKU" + r.nextInt(50));
+        gr.put("quantity", r.nextInt(3));
+        gr.put("price", r.nextInt(50));
 
         ProducerRecord record = new ProducerRecord<String, GenericRecord>(topicName,null,System.currentTimeMillis(),
                                                                    "ORD" + i,
