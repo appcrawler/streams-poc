@@ -1,21 +1,36 @@
-compile the streams software with a standard maven command in this directory, i.e.,
-mvn compile package install
+Assumptions
+---------------------------------------------------------------------------------------------
+* Local Confluent installation available at https://www.confluent.io/download/.  This is free forever
+on a single machine.
 
-cd scripts
-run ./setup.sh in this directory
+---------------------------------------------------------------------------------------------
 
-setup.sh will gut the existing local confluent configuration including all topics, schemas, and 
-connectors.  Ensure this is what you want before you run it!
+Steps
+---------------------------------------------------------------------------------------------
 
-The script, after gutting and restarting the local confluent stack, creates topics and KSQL objects.
-It also starts two instances of the streams software we built above.  Lastly, it loads random
-customers and orders.  You can load data by running the produce.sh script in the scripts directory.
-Again, it is location specific, so ensure you are in the scripts directory to run produce.sh 
+* compile the streams software with a simple tandard maven command in this directory (streams-poc), i.e.,
+	mvn 
 
-To run the check.sh script located under scripts, it assumes you have a load balancer such as HAProxy
-listening on port 7000, and forwarding to ports 8080, 8180, and 8280 for the streams apps that
-are each listening on those port, respectively.  If you don't have a load balancer, you can simply
-post any of the three and you should get the customer queried, regardless of whether it is located
-in the state store of that instance, or not.
+* cd scripts
 
+* run ./setup.sh in this directory
+
+	setup.sh will REMOVE the existing local confluent configuration including all topics, schemas, and 
+	connectors.  Ensure this is what you want before you run it!  There are other ways to do it, but
+	for a repeatable test on a single machine, this is as simple as it gets.
+
+	The script, after gutting and restarting the local confluent stack, creates topics and KSQL objects.
+	It also starts two instances of the streams software we built above.  Lastly, it loads random
+	customers and orders.  
+
+* You can load data by running the produce.sh script in the scripts directory.
+	Again, it is location specific, so ensure you are in the scripts directory to run produce.sh 
+
+* You can experiemnt with interqctive queries with the check.sh script located under scripts. 
+	It assumes you have a load balancer such as HAProxy listening on port 7000, and forwarding
+	to ports 8080, 8180, and 8280 for the streams apps that are each listening on those port, respectively.
+	If you don't have a load balancer, you can simply use thge port of any of the three and you should get the
+	customer queried, regardless of whether it is located in the state store of that instance, or not.
+
+---------------------------------------------------------------------------------------------
 TO-DO - clean up hardcoded references, as well as static references inside some of the classes.
