@@ -48,7 +48,7 @@ public class PocData {
       String schemaString = sb.toString();
       Schema schema = new Schema.Parser().parse(schemaString);
       int j = 0;
-      while (i++ <= 1000) {
+      while (i++ < 100) {
         GenericData.Record gr = new GenericData.Record(schema);
         String order_id = "OH";
         gr.put("order_id","ORD" + i);
@@ -115,7 +115,7 @@ public class PocData {
       }
       String schemaString = sb.toString();
       Schema schema = new Schema.Parser().parse(schemaString);
-      while (i++ <= 20) {
+      while (i++ < 20) {
         GenericData.Record gr = new GenericData.Record(schema);
         gr.put("customer_id","CUST" + i);
         gr.put("first_name",fnames[r.nextInt(fnames.length - 1)]);
