@@ -3,10 +3,14 @@ Assumptions
 * Local Confluent installation available at https://www.confluent.io/download/.  This is free forever
 on a single machine.
 
+* JDK 1.8 installed and executable by running the java executable at the command line
+
 ---------------------------------------------------------------------------------------------
 
 Steps
 ---------------------------------------------------------------------------------------------
+
+* add CONFLUENT_HOME/bin to your PATH variable
 
 * compile the streams software with a simple tandard maven command in this directory (streams-poc), i.e.,
 	mvn 
@@ -25,11 +29,13 @@ Steps
 
 * You can load data by running the produce.sh script in the scripts directory.
 	Again, it is location specific, so ensure you are in the scripts directory to run produce.sh 
+        you can load iether customers or orders by appending either, i.e., ./produce.sh orders.  If you don't
+        pass a value, it will load both.
 
-* You can experiemnt with interqctive queries with the check.sh script located under scripts. 
+* You can experiment with interactive queries with the check.sh script located under scripts. 
 	It assumes you have a load balancer such as HAProxy listening on port 7000, and forwarding
 	to ports 8080, 8180, and 8280 for the streams apps that are each listening on those port, respectively.
-	If you don't have a load balancer, you can simply use thge port of any of the three and you should get the
+	If you don't have a load balancer, you can simply use the port of any of the three and you should get the
 	customer queried, regardless of whether it is located in the state store of that instance, or not.
 
 ---------------------------------------------------------------------------------------------
