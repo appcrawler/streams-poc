@@ -10,7 +10,7 @@ rm -rf /var/lib/kafka
 #---------------------------------------------------------------------------------
 # sleep five seconds to ensure everything to eliminate startup errors
 
-rm -rf /root/streams/scripts/streams-state-store*
+rm -rf streams-state-store*
 
 sleep 5
 confluent local start
